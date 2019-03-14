@@ -9,7 +9,6 @@ int bingo[3][3]{0,0,0,
 				0,0,0,
 				0,0,0};
 int hide[3][3];
-int bingoCount;
 bool bCheck[8];
 
 int main(void) {
@@ -50,12 +49,12 @@ int main(void) {
 		printf("입력 (1~30)> ");
 		scanf("%d", &inputNum);
 		playGround(inputNum);
-		bingoCheck();
-		if (bingoCount>2) {
+		
+		if (bingoCheck() > 2) {
 			printf("클리어!\n");
 		}
 		else {
-			printf("현재 %d빙고입니다.\n", bingoCount);
+			printf("현재 %d빙고입니다.\n", bingoCheck());
 		}
 	}	
 }
@@ -88,6 +87,7 @@ void playGround(int num) {
 }
 
 int bingoCheck() {
+	static int bingoCount = 0;
 	for (int i = 0; i < 3; i++) {
 		if (hide[i][0] != '*' && hide[i][1] != '*' && hide[i][2] != '*' && !bCheck[i]) {
 			bCheck[i] = true;
@@ -107,5 +107,6 @@ int bingoCheck() {
 		bCheck[6] = true;
 		bingoCount++;
 	}
-		return bingoCount;
+
+	return bingoCount;
 }
